@@ -1,9 +1,10 @@
 import * as React from 'react';
+import MapView from '../components/MapView';
 
-class MapView extends React.Component {
+class Map extends React.Component {
   public render() {
-    return (<div>SSS</div>);
+    return (<MapView />);
   }
 }
 
-export default MapView;
+export default Map;
