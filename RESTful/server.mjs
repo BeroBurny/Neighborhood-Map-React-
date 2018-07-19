@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import mapRoutes from './api/routes/mapMarkerRoutes';
 import fillMarkerDBIfIsEmpty from "./fillMarkerDBIfIsEmpty";
 
@@ -16,6 +17,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(mongoDBConnection, mongoDBOprtions);
 fillMarkerDBIfIsEmpty();
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 mapRoutes(app);
