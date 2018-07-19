@@ -9,11 +9,15 @@ const MapElement = styled(InteractiveMap)`
   left: 0;
 `;
 
+interface Props {
+  markers: MarkerType[];
+}
+
 interface State {
   viewport: Viewport;
 }
 
-class MapView extends React.Component<{}, State> {
+class MapView extends React.Component<Props, State> {
   public state = {
     viewport: {
       width: 0,

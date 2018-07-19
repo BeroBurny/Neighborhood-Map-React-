@@ -22,7 +22,8 @@ class Map extends React.Component<Props & ActionProps, State> {
   }
 
   public render() {
-    return (<MapView />);
+    const { markers } = this.props;
+    return (<MapView markers={markers} />);
   }
 }
 
