@@ -1,9 +1,6 @@
 import * as React from 'react';
 import styled from 'react-emotion';
-import './App.css';
-
 import Map from './containers/Map';
-import logoSvg from './logo.svg';
 
 const Root = styled('div')`
   position: fixed;
@@ -25,12 +22,7 @@ class App extends React.Component {
       <Root>
         <Map />
         <Content>
-          <div className="App">
-            <header className="App-header">
-              <img src={logoSvg} className="App-logo" alt="logo" />
-              <h1 className="App-title">Welcome to React</h1>
-            </header>
-          </div>
+          a
         </Content>
       </Root>
     );
