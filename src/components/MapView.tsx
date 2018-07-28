@@ -14,32 +14,18 @@ const MapElement = styled(InteractiveMap)`
 
 interface Props {
   markers: MarkerType[];
+  viewport: Viewport;
   locationInfo: MarkerType | null;
+  setViewport: (viewport: Viewport) => void;
   history: any;
 }
 
-interface State {
-  viewport: Viewport;
-}
-
-class MapView extends React.Component<Props, State> {
-  public state = {
-    viewport: {
-      width: 0,
-      height: 0,
-      latitude: 45.814,
-      longitude: 15.977,
-      zoom: 14,
-    },
-  };
-
+class MapView extends React.Component<Props, {}> {
   public updateDimensions = () => {
-    this.setState({
-      viewport: {
-        ...this.state.viewport,
-        width: window.innerWidth,
-        height: window.innerHeight,
-      },
+    this.props.setViewport({
+      ...this.props.viewport,
+      width: window.innerWidth,
+      height: window.innerHeight,
     });
   }
 
@@ -54,8 +40,7 @@ class MapView extends React.Component<Props, State> {
 
   public render() {
     const apiAccessToken = `${process.env.REACT_APP_MAPBOXACCESSTOKEN}`;
-    const { markers, locationInfo } = this.props;
-    const { viewport } = this.state;
+    const { markers, locationInfo, setViewport, viewport } = this.props;
     const Markers = markers.map(marker => (
       <Marker
         key={marker.id}
@@ -73,7 +58,9 @@ class MapView extends React.Component<Props, State> {
         {...viewport}
         mapboxApiAccessToken={apiAccessToken}
         onClick={() => this.props.history.push('/')}
-        onViewportChange={(newViewport: Viewport) => this.setState({ viewport: newViewport })}
+        onViewportChange={(newViewport: Viewport) => setViewport(
+          { ...newViewport, transitionDuration: 0 },
+          )}
       >
         {Markers}
         {locationInfo ?
