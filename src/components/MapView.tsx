@@ -14,11 +14,12 @@ const MapElement = styled(InteractiveMap)`
 
 interface Props {
   markers: MarkerType[];
+  locationInfo: MarkerType | null;
+  history: any;
 }
 
 interface State {
   viewport: Viewport;
-  locationInfo: MarkerType | null;
 }
 
 class MapView extends React.Component<Props, State> {
@@ -30,7 +31,6 @@ class MapView extends React.Component<Props, State> {
       longitude: 15.977,
       zoom: 14,
     },
-    locationInfo: null,
   };
 
   public updateDimensions = () => {
@@ -54,8 +54,8 @@ class MapView extends React.Component<Props, State> {
 
   public render() {
     const apiAccessToken = `${process.env.REACT_APP_MAPBOXACCESSTOKEN}`;
-    const { markers } = this.props;
-    const { viewport, locationInfo } = this.state;
+    const { markers, locationInfo } = this.props;
+    const { viewport } = this.state;
     const Markers = markers.map(marker => (
       <Marker
         key={marker.id}
@@ -63,16 +63,7 @@ class MapView extends React.Component<Props, State> {
         longitude={marker.lng}
       >
         <MapPin onClick={() => {
-          if (!locationInfo) {
-            this.setState({ locationInfo: marker });
-          } else {
-            const { id } = locationInfo as any;
-            if (id !== marker.id) {
-              this.setState({ locationInfo: marker });
-            } else {
-              this.setState({ locationInfo: null });
-            }
-          }
+          this.props.history.push(marker.id);
         }} />
       </Marker>
     ));
@@ -81,14 +72,14 @@ class MapView extends React.Component<Props, State> {
       <MapElement
         {...viewport}
         mapboxApiAccessToken={apiAccessToken}
-        onClick={() => this.setState({ locationInfo: null })}
+        onClick={() => this.props.history.push('/')}
         onViewportChange={(newViewport: Viewport) => this.setState({ viewport: newViewport })}
       >
         {Markers}
         {locationInfo ?
           <MapLocationInfo
             locationInfo={locationInfo}
-            onClick={() => this.setState({ locationInfo: null })}
+            onClick={() => this.props.history.push('/')}
           />
         : null}
       </MapElement>

@@ -3,6 +3,7 @@ import styled from 'react-emotion';
 import { MdMenu } from 'react-icons/lib/md';
 import Map from './containers/Map';
 import SideMenu from './containers/SideMenu';
+import { Route, Switch } from 'react-router';
 
 const Root = styled('div')`
   position: fixed;
@@ -49,7 +50,10 @@ class App extends React.Component<{}, State> {
     const { isOpenMenu } = this.state;
     return (
       <Root>
-        <Map />
+        <Switch>
+          <Route path="/:ID" component={Map}/>
+          <Route path="/" component={Map}/>
+        </Switch>
         <SideMenuIcon onClick={this.handleOpenSideMenu} visible={!isOpenMenu}>
           <MdMenu size={40} />
         </SideMenuIcon>

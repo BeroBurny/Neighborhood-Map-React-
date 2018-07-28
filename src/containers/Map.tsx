@@ -4,12 +4,16 @@ import { connect } from 'react-redux';
 import { mapActions } from '../ducks/map/action';
 import { Marker } from '../types/Marker';
 import { RootState } from '../ducks/store';
-import { getMapMarkers } from '../ducks/map/selectors';
+import { getLocationInfo, getMapMarkers } from '../ducks/map/selectors';
+import { match, RedirectProps } from 'react-router';
 
 interface State {}
 
 interface Props {
   markers: Marker[];
+  locationInfo: Marker;
+  history: RedirectProps;
+  match: match<{ID: string}>;
 }
 
 interface ActionProps {
@@ -22,13 +26,14 @@ class Map extends React.Component<Props & ActionProps, State> {
   }
 
   public render() {
-    const { markers } = this.props;
-    return (<MapView markers={markers} />);
+    const { markers, history, locationInfo } = this.props;
+    return (<MapView markers={markers} history={history} locationInfo={locationInfo} />);
   }
 }
 
-const mapStateToProps = (state: RootState) => ({
+const mapStateToProps = (state: RootState, ownProps: Props) => ({
   markers: getMapMarkers(state),
+  locationInfo: getLocationInfo(state, ownProps),
 });
 
 const mapDispatchToProps = {
