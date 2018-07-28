@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Marker } from '../types/Marker';
 import styled from 'react-emotion';
+import { Link } from 'react-router-dom';
 
 const Root = styled('div')`
   margin: 0;
@@ -10,6 +11,15 @@ const Root = styled('div')`
 export const CategoryTitle = styled('h2')`
   color: rgba(255,255,255,0.9);
   margin: 5px;
+`;
+
+const Item = styled(Link)`
+  color: #fff;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 interface Props {
@@ -27,7 +37,10 @@ const SideMenuMapListCategory = (props: Props) => {
 
   return (<Root>
     <CategoryTitle>{icon} {name}</CategoryTitle>
-    {markers.map(marker => (<p  key={marker.id}>{marker.name}</p>))}
+    {markers.map(marker => (
+      <Item to={`/${marker.id}` } key={marker.id}>
+        <p>{marker.name}</p>
+      </Item>))}
   </Root>);
 };
 
