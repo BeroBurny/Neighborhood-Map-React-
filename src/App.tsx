@@ -29,6 +29,20 @@ const SideMenuIcon = styled('div')`
   transition: opacity 0.3s linear;
 `;
 
+const Logo = styled('h1')`
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  font-size: 50px;
+  color: #fff;
+  margin: 0;
+  text-shadow:
+    0 1px 3px #111,
+    -1px 1px 3px #111,
+    1px 1px 3px #111,
+    3px 4px 5px #111;
+`;
+
 interface State {
   isOpenMenu: boolean;
 }
@@ -54,6 +68,7 @@ class App extends React.Component<{}, State> {
           <Route path="/:ID" component={Map}/>
           <Route path="/" component={Map}/>
         </Switch>
+        <Logo>Asian Food</Logo>
         <SideMenuIcon onClick={this.handleOpenSideMenu} visible={!isOpenMenu}>
           <MdMenu size={40} />
         </SideMenuIcon>
