@@ -43,6 +43,29 @@ const Root = styled('div')`
   }
 `;
 
+const Container = styled('div')`
+  width: 100%;
+  height: calc(100% - 77px);
+  position: absolute;
+  overflow: auto;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+      background: #888;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+  }
+`;
+
 const Header = styled('h1')`
   margin: 0;
   color: #fff;
@@ -84,36 +107,38 @@ interface ReduxProps {
 const SideMenu = (props: Props & ReduxProps) => (
   <Root isOpen={props.isOpen}>
     <Header>Main Menu</Header>
-    <Filter>
-      <CategoryTitle> <MdStyle /> Category's</CategoryTitle>
-      <Select
-        isMulti
-        value={props.selected}
-        options={mapSelectOptions}
-        onChange={props.handleSelectChange}
+    <Container>
+      <Filter>
+        <CategoryTitle> <MdStyle /> Category's</CategoryTitle>
+        <Select
+          isMulti
+          value={props.selected}
+          options={mapSelectOptions}
+          onChange={props.handleSelectChange}
+        />
+      </Filter>
+      <SideMenuMapListCategory
+        isVisible={props.isRestaurantVisible}
+        markers={props.markers.filter(marker => marker.type === 'restaurant')}
+        name="Restaurant's"
+        icon={<MdRestaurantMenu />}
       />
-    </Filter>
-    <SideMenuMapListCategory
-      isVisible={props.isRestaurantVisible}
-      markers={props.markers.filter(marker => marker.type === 'restaurant')}
-      name="Restaurant's"
-      icon={<MdRestaurantMenu />}
-    />
-    <SideMenuMapListCategory
-      isVisible={props.isFastFoodVisible}
-      markers={props.markers.filter(marker => marker.type === 'fastFood')}
-      name="Fast Food Restaurant's"
-      icon={<MdRestaurant />}
-    />
-    <SideMenuMapListCategory
-      isVisible={props.isShopVisible}
-      markers={props.markers.filter(marker => marker.type === 'shop')}
-      name="Shop's"
-      icon={<MdShoppingBasket />}
-    />
-    <SideMenuCloseIcon onClick={props.onClose}>
-      <MdArrowForward size={40} />
-    </SideMenuCloseIcon>
+      <SideMenuMapListCategory
+        isVisible={props.isFastFoodVisible}
+        markers={props.markers.filter(marker => marker.type === 'fastFood')}
+        name="Fast Food Restaurant's"
+        icon={<MdRestaurant />}
+      />
+      <SideMenuMapListCategory
+        isVisible={props.isShopVisible}
+        markers={props.markers.filter(marker => marker.type === 'shop')}
+        name="Shop's"
+        icon={<MdShoppingBasket />}
+      />
+      <SideMenuCloseIcon onClick={props.onClose}>
+        <MdArrowForward size={40} />
+      </SideMenuCloseIcon>
+    </Container>
   </Root>
 );
 
