@@ -14,8 +14,9 @@ function* fetchMarkers() {
     const markersDto: MarkerDto[] = yield call(fetchMarkersRequest);
     const markers: Marker[] = markersDto.map(markerDto => markerDtoToMarker(markerDto));
     yield put(mapActions.markers.add(markers));
+    yield put(mapActions.backend.success());
   } catch (e) {
-    console.log(e);
+    yield put(mapActions.backend.error());
   }
 }
 

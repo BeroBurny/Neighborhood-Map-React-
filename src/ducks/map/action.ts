@@ -15,6 +15,11 @@ export const mapActions = {
   viewport: {
     set: createStandardAction(mapTypes.SET_VIEWPORT)<Viewport>(),
   },
+  backend: {
+    loading: createStandardAction((mapTypes.BACKEND_LOADING))(),
+    error: createStandardAction(mapTypes.BACKEND_ERROR)(),
+    success: createStandardAction(mapTypes.BACKEND_SUCCESS)(),
+  },
 };
 
 export type MapAction = ActionType<typeof mapActions>;

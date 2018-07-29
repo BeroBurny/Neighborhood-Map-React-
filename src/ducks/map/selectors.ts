@@ -4,10 +4,12 @@ import { SelectOption } from '../../types/SelectOption';
 import { Marker } from '../../types/Marker';
 import { match } from 'react-router';
 import { Viewport } from '../../types/Viewport';
+import { BackendStatus } from '../../types/BackendStatus';
 
 export const getAllMapMarkers = (state: RootState): Marker[] => state.map.markers;
 export const getSelectedMapTypes = (state: RootState): SelectOption[] => state.map.selected;
 export const getViewPort = (state: RootState): Viewport => state.map.viewport;
+export const getBackendStatus = (state: RootState): BackendStatus => state.map.backend;
 export const getRouteIdFromProps = (
   _: any,
   props: {match: match<{ID: string}>},

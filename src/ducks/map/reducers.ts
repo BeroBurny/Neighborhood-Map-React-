@@ -7,16 +7,19 @@ import { SelectOption } from '../../types/SelectOption';
 import mapSelectOptions from '../../utils/mapSelectOptions';
 import { Viewport } from '../../types/Viewport';
 import { FlyToInterpolator } from 'react-map-gl';
+import { BackendStatus } from '../../types/BackendStatus';
 
 export type MapState = {
   markers: Marker[],
   selected: SelectOption[],
   viewport: Viewport,
+  backend: BackendStatus,
 };
 
 export const initialState: MapState = {
   markers: [],
   selected: mapSelectOptions,
+  backend: 'loading',
   viewport: {
     width: 0,
     height: 0,
@@ -41,6 +44,18 @@ export const mapReducer = produce<MapState, MapAction>(
 
       case getType(mapActions.viewport.set):
         state.viewport = action.payload;
+        return;
+
+      case getType(mapActions.backend.loading):
+        state.backend = 'loading';
+        return;
+
+      case getType(mapActions.backend.success):
+        state.backend = 'success';
+        return;
+
+      case getType(mapActions.backend.error):
+        state.backend = 'error';
         return;
     }
   },
