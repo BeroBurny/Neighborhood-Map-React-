@@ -38,4 +38,4 @@ _(In case you need change setting for a server you can use environment variables
 * typesafe-actions - https://github.com/piotrwitek/typesafe-actions
 
 ## Credits
-Front-End and Back-End writer Bernard @BeroBurny Stojanovic
+Front-End and Back-End writer Bernard "@BeroBurny" Stojanovic
