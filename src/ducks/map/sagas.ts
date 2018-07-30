@@ -7,7 +7,8 @@ import markerDtoToMarker from '../../utils/markerDtoToMarker';
 import { mapActions } from './action';
 
 const fetchMarkersRequest = () =>
-  api.get('/markers').then(res => res.data);
+  api.get('/markers').then(res => res.data)
+    .then((res) => { localStorage.setItem('markers', JSON.stringify(res)); return res; });
 
 function* fetchMarkers() {
   try {
@@ -16,7 +17,19 @@ function* fetchMarkers() {
     yield put(mapActions.markers.add(markers));
     yield put(mapActions.backend.success());
   } catch (e) {
-    yield put(mapActions.backend.error());
+    if (localStorage) {
+      const localMarkers = localStorage.getItem('markers');
+      if (localMarkers) {
+        const markersDto: MarkerDto[] = JSON.parse(localMarkers);
+        const markers: Marker[] = markersDto.map(markerDto => markerDtoToMarker(markerDto));
+        yield put(mapActions.markers.add(markers));
+        yield put(mapActions.backend.success());
+      } else {
+        yield put(mapActions.backend.error());
+      }
+    } else {
+      yield put(mapActions.backend.error());
+    }
   }
 }
 
