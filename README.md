@@ -6,7 +6,7 @@ Asian Food Map project as part for final Project for Udacity Front End Web Devel
 This project use TypeScript for details check on [typescriptlang.org](https://www.typescriptlang.org)
 
 ### Back-End Server
-Back-End server is simple `Express` server based on `nodeJs`. Required Front-End application  
+Back-End server is simple `Express` server based on `nodeJs`. Required for Front-End application  
 For installing it navigate inside `RESTful` folder and make `npm install` (or `yarn install`)  
 Server use MongoDB for database if you need one here is guide => [guide link](https://docs.mongodb.com/manual/installation/)  
 Then start server whit `npm start` (or `yarn start`)  
