@@ -6,6 +6,7 @@ import { Marker as MarkerType } from '../types/Marker';
 import MapPin from './MapPin';
 import MapLocationInfo from './MapLocationInfo';
 
+// Add style for Map
 const MapElement = styled(InteractiveMap)`
   position: fixed;
   top: 0;
@@ -41,6 +42,8 @@ class MapView extends React.Component<Props, {}> {
   public render() {
     const apiAccessToken = `${process.env.REACT_APP_MAPBOXACCESSTOKEN}`;
     const { markers, locationInfo, setViewport, viewport } = this.props;
+
+    // Calculate markers for displaying on map
     const Markers = markers.map(marker => (
       <Marker
         key={marker.id}
@@ -49,7 +52,9 @@ class MapView extends React.Component<Props, {}> {
       >
         <MapPin onClick={() => {
           this.props.history.push(marker.id);
-        }} />
+        }}
+        selected={locationInfo !== null && marker.id === locationInfo.id}
+        />
       </Marker>
     ));
 
@@ -64,6 +69,7 @@ class MapView extends React.Component<Props, {}> {
       >
         {Markers}
         {locationInfo ?
+          // if is icon selected render it on map
           <MapLocationInfo
             locationInfo={locationInfo}
             onClick={() => this.props.history.push('/')}

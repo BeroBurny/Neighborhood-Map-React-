@@ -28,4 +28,4 @@ app.use((req, res) => {
 
 app.listen(port);
 
-console.log('neighborhood-map RESTful API server started on: ' + port);
+console.log(`neighborhood-map RESTful API server started on: http://localhost:${port}/`);

@@ -5,6 +5,7 @@ import Map from './containers/Map';
 import SideMenu from './containers/SideMenu';
 import { Route, Switch } from 'react-router';
 
+// Main Container for holding Content on page
 const Root = styled('div')`
   position: fixed;
   top: 0;
@@ -13,10 +14,12 @@ const Root = styled('div')`
   width: 100vw;
 `;
 
+// Props for Side Menu Icon
 interface SideMenuIconProps {
   visible: boolean;
 }
 
+// Icon Container on top right corner
 const SideMenuIcon = styled('div')`
   position: fixed;
   top: 10px;
@@ -29,6 +32,7 @@ const SideMenuIcon = styled('div')`
   transition: opacity 0.3s linear;
 `;
 
+// Page Logo Style...
 const Logo = styled('h1')`
   position: fixed;
   top: 10px;
@@ -68,7 +72,7 @@ class App extends React.Component<{}, State> {
           <Route path="/:ID" component={Map}/>
           <Route path="/" component={Map}/>
         </Switch>
-        <Logo>Asian Food</Logo>
+        {process.env.REACT_APP_MAPBOXACCESSTOKEN ? <Logo>Asian Food</Logo> : null}
         <SideMenuIcon onClick={this.handleOpenSideMenu} visible={!isOpenMenu}>
           <MdMenu size={40} />
         </SideMenuIcon>

@@ -23,10 +23,12 @@ import { SelectOption } from '../types/SelectOption';
 import { mapActions } from '../ducks/map/action';
 import SideMenuMapListCategory, { CategoryTitle } from '../components/SideMenuMapListCategory';
 
+// Props for Root Style
 interface RootProps {
   isOpen: boolean;
 }
 
+// Root Container Style for SideMenu
 const Root = styled('div')`
   width: 400px;
   height: 100vh;
@@ -43,24 +45,23 @@ const Root = styled('div')`
   }
 `;
 
+// Container for side menu items
 const Container = styled('div')`
   width: 100%;
   height: calc(100% - 77px);
   position: absolute;
   overflow: auto;
 
+  // scrollbar style
   ::-webkit-scrollbar {
     width: 10px;
   }
-
   ::-webkit-scrollbar-track {
       background: #f1f1f1;
   }
-
   ::-webkit-scrollbar-thumb {
       background: #888;
   }
-
   ::-webkit-scrollbar-thumb:hover {
       background: #555;
   }
@@ -73,6 +74,7 @@ const Header = styled('h1')`
   background-color: rgba(17,17,17,0.8);
 `;
 
+// Filter container
 const Filter = styled('div')`
   margin: 0;
   padding: 20px;
@@ -95,6 +97,7 @@ interface Props {
   onClose: () => void;
 }
 
+// Props from Redux
 interface ReduxProps {
   markers: Marker[];
   selected: SelectOption[];
@@ -119,18 +122,21 @@ const SideMenu = (props: Props & ReduxProps) => (
       </Filter>
       <SideMenuMapListCategory
         isVisible={props.isRestaurantVisible}
+        // Filter marker list to get only correct one in list
         markers={props.markers.filter(marker => marker.type === 'restaurant')}
         name="Restaurant's"
         icon={<MdRestaurantMenu />}
       />
       <SideMenuMapListCategory
         isVisible={props.isFastFoodVisible}
+        // Filter marker list to get only correct one in list
         markers={props.markers.filter(marker => marker.type === 'fastFood')}
         name="Fast Food Restaurant's"
         icon={<MdRestaurant />}
       />
       <SideMenuMapListCategory
         isVisible={props.isShopVisible}
+        // Filter marker list to get only correct one in list
         markers={props.markers.filter(marker => marker.type === 'shop')}
         name="Shop's"
         icon={<MdShoppingBasket />}

@@ -3,6 +3,9 @@ import styled from 'react-emotion';
 import { Popup } from 'react-map-gl';
 import { Marker } from '../types/Marker';
 
+////////////////////////////////////////////////////
+// styles for elements inside Location information
+///////////////////////////////////////////////////
 const Container = styled('div')`
   width: 300px;
 `;
@@ -35,6 +38,9 @@ const RatingText = styled('span')`
   font-size: 1.1rem;
   color: #ffd700;
 `;
+
+// end
+///////////////////////////////////////////////////
 
 interface Props {
   locationInfo: Marker;

@@ -9,6 +9,7 @@ import { mapReducer } from './map/reducers';
 const sagaMiddleware = reduxSaga();
 
 const middleware = [sagaMiddleware];
+// redux dev tool config
 const composeEnhancers =
   (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
   (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -26,6 +27,7 @@ const store = createStore(
   ),
 );
 
+// Saga Middleware start point
 sagaMiddleware.run(rootSaga);
 
 export default store;
