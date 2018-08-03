@@ -52,11 +52,11 @@ write address from end od message `http://localhost:3001/` (you gonna need for .
 * typesafe-actions - https://github.com/piotrwitek/typesafe-actions
 
 ### Back-End Server
-Back-End server is simple `Express` server based on `nodeJs`. Required Front-End application  
+Back-End server is simple `Express` server based on `nodeJs`. Required for Front-End application  
 For installing it navigate inside `RESTful` folder and make `npm install` (or `yarn install`)  
 Server use MongoDB for database if you need one here is guide => [guide link](https://docs.mongodb.com/manual/installation/)  
 Then start server whit `npm start` (or `yarn start`)  
 _(In case you need change setting for a server you can use environment variables, check `server.mjs` for list)_
 
 ## Credits
-Front-End and Back-End writer Bernard "@BeroBurny" Stojanovic 
+Front-End and Back-End writer Bernard "@BeroBurny" Stojanovic
