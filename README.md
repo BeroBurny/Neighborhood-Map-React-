@@ -35,7 +35,7 @@ write address from end od message `http://localhost:3001/` (you gonna need for .
     * more about deployment you can read on [http://bit.ly/2vY88Kr](http://bit.ly/2vY88Kr)
 * install local server `npm install -g serve` (or `yarn global add serve`)
 * start local server `serve -s build` and navigate to
-* open favorite browser and open address `http://localhost:5000`
+* open favorite browser and enter address `http://localhost:5000`
   * happy exploring! :grin:
   * Enjoy in offline experience whit service worker :stuck_out_tongue_winking_eye:
   
