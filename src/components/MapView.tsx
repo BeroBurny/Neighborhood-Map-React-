@@ -49,7 +49,9 @@ class MapView extends React.Component<Props, {}> {
       >
         <MapPin onClick={() => {
           this.props.history.push(marker.id);
-        }} />
+        }}
+        selected={locationInfo !== null && marker.id === locationInfo.id}
+        />
       </Marker>
     ));
 
