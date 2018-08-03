@@ -68,7 +68,7 @@ class App extends React.Component<{}, State> {
           <Route path="/:ID" component={Map}/>
           <Route path="/" component={Map}/>
         </Switch>
-        <Logo>Asian Food</Logo>
+        {process.env.REACT_APP_MAPBOXACCESSTOKEN ? <Logo>Asian Food</Logo> : null}
         <SideMenuIcon onClick={this.handleOpenSideMenu} visible={!isOpenMenu}>
           <MdMenu size={40} />
         </SideMenuIcon>

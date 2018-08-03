@@ -26,7 +26,8 @@ const StatusMessage = styled('p')`
   width: 100%;
   text-align: center;
   margin: 0;
-  padding: 5px;
+  padding: 10px;
+  font-size: 1.3rem;
   color: ${(props: StatusMessagePros) =>
   props.status !== 'error' ? '#111' : '#fff'};
   background-color: ${(props: StatusMessagePros) =>
