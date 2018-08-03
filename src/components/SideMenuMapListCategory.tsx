@@ -13,6 +13,7 @@ export const CategoryTitle = styled('h2')`
   margin: 5px;
 `;
 
+// Style for item in list
 const Item = styled(Link)`
   color: #fff;
   text-decoration: none;

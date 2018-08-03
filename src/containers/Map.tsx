@@ -8,17 +8,19 @@ import {
   getBackendStatus,
   getLocationInfo,
   getMapMarkers,
-  getViewPort,
+  getViewport,
 } from '../ducks/map/selectors';
 import { match, RedirectProps } from 'react-router';
 import { Viewport } from '../types/Viewport';
 import styled from 'react-emotion';
 import { BackendStatus } from '../types/BackendStatus';
 
+// Props for Status Message
 interface StatusMessagePros {
   status: BackendStatus;
 }
 
+// Style for API status on bottom of page...
 const StatusMessage = styled('p')`
   position: fixed;
   bottom: 0;
@@ -34,8 +36,6 @@ const StatusMessage = styled('p')`
     props.status !== 'error' ? '#dfd54a' : '#c35152'};
 `;
 
-interface State {}
-
 interface Props {
   markers: Marker[];
   viewport: Viewport;
@@ -50,17 +50,19 @@ interface ActionProps {
   setViewport: (viewport: Viewport) => void;
 }
 
-class Map extends React.Component<Props & ActionProps, State> {
+class Map extends React.Component<Props & ActionProps, {}> {
   public componentDidMount() {
     this.props.fetchAllMarkers();
   }
 
   public componentDidUpdate(props: Props & ActionProps) {
+    // Compare route whit all markers and if match display that marker info.
     if (!(props.match.url === this.props.match.url) && this.props.match.url !== '/') {
       const distance = Math.hypot(
         this.props.viewport.latitude - this.props.viewport.longitude,
         this.props.locationInfo.lat - this.props.locationInfo.lng,
       ) % 1;
+      // calculate camera transition speed
       const timeByZoom = this.props.viewport.zoom * 200;
       this.props.setViewport({
         ...this.props.viewport,
@@ -98,7 +100,7 @@ class Map extends React.Component<Props & ActionProps, State> {
 const mapStateToProps = (state: RootState, ownProps: Props) => ({
   markers: getMapMarkers(state),
   locationInfo: getLocationInfo(state, ownProps),
-  viewport: getViewPort(state),
+  viewport: getViewport(state),
   backendStatus: getBackendStatus(state),
 });
 

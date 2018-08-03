@@ -12,22 +12,31 @@ const fetchMarkersRequest = () =>
 
 function* fetchMarkers() {
   try {
+    // Fetch data from network
     const markersDto: MarkerDto[] = yield call(fetchMarkersRequest);
+    // Normalize data for efficient work
     const markers: Marker[] = markersDto.map(markerDto => markerDtoToMarker(markerDto));
+    // Send results to reducers
     yield put(mapActions.markers.add(markers));
     yield put(mapActions.backend.success());
   } catch (e) {
+    // in case of fetching failure check if is local storage available
     if (localStorage) {
+      // check if is data available in local storage
       const localMarkers = localStorage.getItem('markers');
       if (localMarkers) {
         const markersDto: MarkerDto[] = JSON.parse(localMarkers);
+        // Normalize data for efficient work
         const markers: Marker[] = markersDto.map(markerDto => markerDtoToMarker(markerDto));
+        // Send results to reducers
         yield put(mapActions.markers.add(markers));
         yield put(mapActions.backend.success());
       } else {
+        // Send Error message to reducer
         yield put(mapActions.backend.error());
       }
     } else {
+      // Send Error message to reducer
       yield put(mapActions.backend.error());
     }
   }

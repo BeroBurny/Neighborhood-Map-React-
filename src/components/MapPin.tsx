@@ -7,6 +7,7 @@ interface PinProps {
   selected: boolean;
 }
 
+// Style for Map Pin
 const Pin = styled(MdLocationOn)`
   cursor: pointer;
   fill: ${(props: PinProps) => props.selected ? '#0fff4f' : '#dd4918'};

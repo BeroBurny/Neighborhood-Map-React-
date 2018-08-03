@@ -1,3 +1,4 @@
+// get array and return only unique values
 const getUniqueArray = <T>(array: T[]): T[] => {
   const set = new Set(array);
   const newArray: T[] = [];

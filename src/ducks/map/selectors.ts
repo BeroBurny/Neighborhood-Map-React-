@@ -6,10 +6,15 @@ import { match } from 'react-router';
 import { Viewport } from '../../types/Viewport';
 import { BackendStatus } from '../../types/BackendStatus';
 
+// get all markers from redux state
 export const getAllMapMarkers = (state: RootState): Marker[] => state.map.markers;
+// get selected map types from redux state
 export const getSelectedMapTypes = (state: RootState): SelectOption[] => state.map.selected;
-export const getViewPort = (state: RootState): Viewport => state.map.viewport;
+// get viewport from redux state
+export const getViewport = (state: RootState): Viewport => state.map.viewport;
+// get backend server status  from redux state
 export const getBackendStatus = (state: RootState): BackendStatus => state.map.backend;
+// get route id from received props
 export const getRouteIdFromProps = (
   _: any,
   props: {match: match<{ID: string}>},
@@ -21,6 +26,7 @@ export const getRouteIdFromProps = (
   return ID;
 };
 
+// get location information for selected marker
 export const getLocationInfo = createSelector(
   getAllMapMarkers,
   getRouteIdFromProps,
@@ -32,6 +38,7 @@ export const getLocationInfo = createSelector(
   },
 );
 
+// get map markers in range of selected types
 export const getMapMarkers = createSelector(
   getAllMapMarkers,
   getSelectedMapTypes,
@@ -47,14 +54,17 @@ export const getMapMarkers = createSelector(
     }),
 );
 
+// check if is type selected
 export const getIfIsRestaurantVisible = createSelector(
   getSelectedMapTypes,
   (selected): boolean => !!selected.filter(({ value }) => value === 'restaurant').length,
 );
+// check if is type selected
 export const getIfIsFastFoodVisible = createSelector(
   getSelectedMapTypes,
   (selected): boolean => !!selected.filter(({ value }) => value === 'fastFood').length,
 );
+// check if is type selected
 export const getIfIsShopVisible = createSelector(
   getSelectedMapTypes,
   (selected): boolean => !!selected.filter(({ value }) => value === 'shop').length,

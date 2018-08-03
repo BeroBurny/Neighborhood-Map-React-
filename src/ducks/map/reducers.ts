@@ -16,6 +16,7 @@ export type MapState = {
   backend: BackendStatus,
 };
 
+// default state for Map
 export const initialState: MapState = {
   markers: [],
   selected: mapSelectOptions,
@@ -34,18 +35,23 @@ export const initialState: MapState = {
 export const mapReducer = produce<MapState, MapAction>(
   (state, action) => {
     switch (action.type) {
+      // Add markers to state
       case getType(mapActions.markers.add):
         state.markers = getUniqueArray<Marker>([...state.markers, ...action.payload]);
         return;
 
+      // Change selected categories...
       case getType(mapActions.selected.change):
         state.selected = action.payload;
         return;
 
+      // Set State for map marker Info
       case getType(mapActions.viewport.set):
         state.viewport = action.payload;
         return;
 
+      ////////////////////////
+      // Set fetching status
       case getType(mapActions.backend.loading):
         state.backend = 'loading';
         return;
